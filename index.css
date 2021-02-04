@@ -1,0 +1,55 @@
+.toppin {
+	justify-content: center;
+	text-align: center;
+}
+#ms {
+	font-size: 16px
+}
+.instruction {
+	margin-top: -20px;
+	margin-bottom: 10px;
+}
+#next {
+	display: none;
+	visibility: none;
+}
+
+.result {
+	display: none;
+	visibility: none;
+	position: absolute;
+}
+
+.imageShow {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px
+}
+
+.metamers {
+	width: 500px;
+	height: 500px;
+	image-rendering: pixelated;
+}
+
+.footButtons {
+	width: 100%;
+	justify-content: space-around;
+	display: flex;
+	position: absolute;
+	bottom: 0;
+}
+
+.button {
+	font-size: 24px;
+	height: 80px;
+	width: 250px;
+}
+
+.button_onclick_right {
+    background-color: #90ee90;
+}
+
+.button_onclick_wrong {
+    background-color: #f08080;
+}

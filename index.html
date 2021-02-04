@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test Metamers</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	</style>
+</head>
+<body>
+
+<div class="toppin">
+
+	<h1>Test Metamers <span id="curnum">0</span>/50
+
+	<input type="number" placeholder="input texture duration" id="duration" name="duration" min="200" step="100"><span id="ms">ms  </span>
+
+	<select id="select">
+	  <option value="2">2 straps</option>
+	  <option value="4">4 straps</option>
+	  <option value="8">8 straps</option>
+	</select>
+
+	</h1>
+
+	<div class="instruction">Use ArrowDown to show the metamers, use ArrowLeft/ArrowRight or click the bottom buttons to make choices! The initial duration will be 200ms</div>
+	<button class="button" id="next" onclick="nextImage()">Next Image</button>
+
+</div>
+
+<div class="result" id="result"></div>
+
+
+<div class="imageShow" id="imageShow">
+
+	<img class="metamers" 
+	 id="metamers">
+
+</div>
+
+<div class="footButtons">
+	<button class="button" id="vertical" onclick="checkCorrect(this.id)">vertical</button>
+	<button class="button" id="horizontal" onclick="checkCorrect(this.id)">horizontal</button>
+</div>
+
+<script type="text/javascript">
+var count = 0;
+var duration = 200;
+var two_strap = [1, 2, 7, 8]
+var four_strap = [3, 4, 9, 10]
+var eight_strap = [5, 6, 11, 12]
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'ArrowDown') {
+  	event.preventDefault();
+    var element = document.getElementById("next")
+    element.click()
+  }
+  else if (event.code == 'ArrowLeft') {
+  	event.preventDefault();
+    var element = document.getElementById("vertical")
+    element.click()
+  }
+
+  else if (event.code == 'ArrowRight') {
+  	event.preventDefault();
+    var element = document.getElementById("horizontal")
+    element.click()
+  }
+});
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+ 
+  element.style.display = 'none';
+  document.body.appendChild(element);
+ 
+  element.click();
+ 
+  document.body.removeChild(element);
+}
+ 
+ 
+
+
+
+function nextImage() {
+	var numberOfStraps = document.getElementById("select").value;
+	if (numberOfStraps == "2") {
+		var imgArr = two_strap;
+	}
+	else if (numberOfStraps == "4") {
+		var imgArr = four_strap;
+	}
+	else if (numberOfStraps == "8") {
+		var imgArr = eight_strap;
+	}
+
+
+	var classVal = document.getElementById("vertical").getAttribute("class");
+	classVal = classVal.replace("button_onclick_right","");
+	classVal = classVal.replace("button_onclick_wrong","");
+	document.getElementById("vertical").setAttribute("class",classVal);
+
+	var classVal = document.getElementById("horizontal").getAttribute("class");
+	classVal = classVal.replace("button_onclick_right","");
+	classVal = classVal.replace("button_onclick_wrong","");
+	document.getElementById("horizontal").setAttribute("class",classVal );
+
+
+	var rand = Math.floor(Math.random() * 4);
+	var img = document.getElementById("metamers");
+	var duration = Number(document.getElementById("duration").value);
+	console.log(duration)
+	img.style.display = "";
+	var img_str = `${imgArr[rand]}`
+	var img_str = img_str.padStart(3, '0')
+	img.src = img_str+'.png'
+	console.log(img.src)
+	setTimeout("document.getElementById('metamers').style.display='none'",duration);
+}
+
+
+function checkCorrect(checkedId) {
+	count++;
+	var button = document.getElementById(checkedId);
+
+	var img = document.getElementById("metamers");
+	var srcIndex = img.src.lastIndexOf('/');
+	var src = img.src.slice(srcIndex+1);
+
+	if (checkedId == "vertical") {
+		if (src == "007.png" || src == "008.png" || src == "009.png" || src == "010.png" || src == "011.png" || src == "012.png") {
+			button.classList.add("button_onclick_right");
+		}
+		else {
+			button.classList.add("button_onclick_wrong");
+		}
+	}
+	else if (checkedId == "horizontal") {
+		if (src == "001.png" || src == "002.png" || src == "003.png" || src == "004.png" || src == "005.png" || src == "006.png") {
+			button.classList.add("button_onclick_right");
+		}
+		else {
+			button.classList.add("button_onclick_wrong");
+		}
+	}
+
+	var result = document.getElementById("result");
+
+	result.innerText = result.innerText + src + ' ' + checkedId + ' ';
+	var curnum = document.getElementById("curnum");
+	curnum.innerText = count;
+	if (count == 50) {
+		var text = document.getElementById('result').innerText;
+		download("result.txt",text); 
+	}
+}
+
+</script>
+
+
+
+</body>
+</html>
