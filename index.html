@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test Metamers</title>
+	<title>Test Strap Metamers</title>
 	<link rel="stylesheet" type="text/css" href="index.css">
 	</style>
 </head>
@@ -22,6 +22,7 @@
 	</h1>
 
 	<div class="instruction">Use ArrowDown to show the metamers, use ArrowLeft/ArrowRight or click the bottom buttons to make choices! The initial duration will be 200ms</div>
+	<div class="instruction">The viewing distance should be 5.8 times the size of texture. For example, the side length of texture showing on your computer is 10cm, then your viewing distance should be 58cm.</div>
 	<button class="button" id="next" onclick="nextImage()">Next Image</button>
 
 </div>
@@ -83,8 +84,9 @@ function download(filename, text) {
  
 
 
-
+var param;
 function nextImage() {
+	clearTimeout(param);
 	var numberOfStraps = document.getElementById("select").value;
 	if (numberOfStraps == "2") {
 		var imgArr = two_strap;
@@ -105,7 +107,7 @@ function nextImage() {
 	var classVal = document.getElementById("horizontal").getAttribute("class");
 	classVal = classVal.replace("button_onclick_right","");
 	classVal = classVal.replace("button_onclick_wrong","");
-	document.getElementById("horizontal").setAttribute("class",classVal );
+	document.getElementById("horizontal").setAttribute("class",classVal);
 
 
 	var rand = Math.floor(Math.random() * 4);
@@ -116,8 +118,8 @@ function nextImage() {
 	var img_str = `${imgArr[rand]}`
 	var img_str = img_str.padStart(3, '0')
 	img.src = img_str+'.png'
-	console.log(img.src)
-	setTimeout("document.getElementById('metamers').style.display='none'",duration);
+	param = setTimeout("document.getElementById('metamers').style.display='none'",duration);
+	console.log(param)
 }
 
 
