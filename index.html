@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Test Strap Metamers</title>
+	<title>Test Stripe Metamers</title>
 	<link rel="stylesheet" type="text/css" href="index.css">
 	</style>
 </head>
 <body>
+
+<div class="hidden">
+	<script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+			var images = new Array()
+			function preload() {
+				for (i = 0; i < preload.arguments.length; i++) {
+					images[i] = new Image()
+					images[i].src = preload.arguments[i]
+				}
+			}
+			preload(
+				"001.png",
+				"002.png",
+				"003.png",
+				"004.png",
+				"005.png",
+				"006.png",
+				"007.png",
+				"008.png",
+				"009.png",
+				"010.png",
+				"011.png",
+				"012.png"
+			)
+		//--><!]]>
+	</script>
+</div>
 
 <div class="toppin">
 
@@ -87,6 +115,8 @@ function download(filename, text) {
 var param;
 var isChecked = false;
 var choiceId;
+var numberOfStraps;
+var duration;
 
 
 function nextImage() {
@@ -103,7 +133,7 @@ function nextImage() {
 		var curnum = document.getElementById("curnum");
 		curnum.innerText = count;
 		if (count == 50) {
-			var text = document.getElementById('result').innerText;
+			var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration;
 			download("result.txt",text); 
 		}
 	}
@@ -111,7 +141,7 @@ function nextImage() {
 	clearTimeout(param);
 	isChecked = false;
 
-	var numberOfStraps = document.getElementById("select").value;
+	numberOfStraps = document.getElementById("select").value;
 	if (numberOfStraps == "2") {
 		var imgArr = two_strap;
 	}
@@ -136,7 +166,7 @@ function nextImage() {
 
 	var rand = Math.floor(Math.random() * 4);
 	var img = document.getElementById("metamers");
-	var duration = Number(document.getElementById("duration").value);
+	duration = Number(document.getElementById("duration").value);
 	console.log(duration)
 	img.style.display = "";
 	var img_str = `${imgArr[rand]}`
