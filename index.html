@@ -39,7 +39,13 @@
 
 	<h1>Test Metamers <span id="curnum">0</span>/50
 
-	<input type="number" placeholder="input texture duration" id="duration" name="duration" min="200" step="100"><span id="ms">ms  </span>
+	<select id="duration">
+	  <option value="200">200ms</option>
+	  <option value="500">500ms</option>
+	  <option value="1000">1000ms</option>
+	</select>
+
+	<!-- input type="number" placeholder="input texture duration" id="duration" name="duration" min="200" step="100"><span id="ms">ms  </span> -->
 
 	<select id="select">
 	  <option value="2">2 straps</option>
@@ -112,7 +118,7 @@ function download(filename, text) {
  
 
 
-var param;
+var param; //timer index
 var isChecked = false;
 var choiceId;
 var numberOfStraps;
@@ -120,8 +126,9 @@ var duration;
 
 
 function nextImage() {
+	// load only when count = 0 or ischecked = true
 
-	if (isChecked == true) {
+	if (isChecked == true && count != 0) {
 		count++;
 		var result = document.getElementById("result");
 		var img = document.getElementById("metamers");
@@ -132,48 +139,80 @@ function nextImage() {
 		result.innerText = result.innerText + src + ' ' + choiceId + ' ';
 		var curnum = document.getElementById("curnum");
 		curnum.innerText = count;
-		if (count == 50) {
+		if (count == 51) {
 			var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration;
 			download("result.txt",text); 
 		}
+
+		clearTimeout(param);
+		isChecked = false;
+
+		numberOfStraps = document.getElementById("select").value;
+		if (numberOfStraps == "2") {
+			var imgArr = two_strap;
+		}
+		else if (numberOfStraps == "4") {
+			var imgArr = four_strap;
+		}
+		else if (numberOfStraps == "8") {
+			var imgArr = eight_strap;
+		}
+
+
+		var classVal = document.getElementById("vertical").getAttribute("class");
+		classVal = classVal.replace("button_onclick_right","");
+		classVal = classVal.replace("button_onclick_wrong","");
+		document.getElementById("vertical").setAttribute("class",classVal);
+
+		var classVal = document.getElementById("horizontal").getAttribute("class");
+		classVal = classVal.replace("button_onclick_right","");
+		classVal = classVal.replace("button_onclick_wrong","");
+		document.getElementById("horizontal").setAttribute("class",classVal);
+
+
+		var rand = Math.floor(Math.random() * 4);
+		var img = document.getElementById("metamers");
+		duration = Number(document.getElementById("duration").value);
+		console.log(duration)
+		img.style.display = "";
+		var img_str = `${imgArr[rand]}`
+		var img_str = img_str.padStart(3, '0')
+		img.src = img_str+'.png'
+		param = setTimeout("document.getElementById('metamers').style.display='none'",duration);
+		console.log(param)
+
 	}
 
-	clearTimeout(param);
-	isChecked = false;
+	if (count == 0) {
 
-	numberOfStraps = document.getElementById("select").value;
-	if (numberOfStraps == "2") {
-		var imgArr = two_strap;
+		isChecked = false;
+		count++;
+
+		numberOfStraps = document.getElementById("select").value;
+		if (numberOfStraps == "2") {
+			var imgArr = two_strap;
+		}
+		else if (numberOfStraps == "4") {
+			var imgArr = four_strap;
+		}
+		else if (numberOfStraps == "8") {
+			var imgArr = eight_strap;
+		}
+
+
+		var rand = Math.floor(Math.random() * 4);
+		var img = document.getElementById("metamers");
+		duration = Number(document.getElementById("duration").value);
+		console.log(duration)
+		img.style.display = "";
+		var img_str = `${imgArr[rand]}`
+		var img_str = img_str.padStart(3, '0')
+		img.src = img_str+'.png'
+		param = setTimeout("document.getElementById('metamers').style.display='none'",duration);
+		console.log(param)
+
 	}
-	else if (numberOfStraps == "4") {
-		var imgArr = four_strap;
-	}
-	else if (numberOfStraps == "8") {
-		var imgArr = eight_strap;
-	}
 
-
-	var classVal = document.getElementById("vertical").getAttribute("class");
-	classVal = classVal.replace("button_onclick_right","");
-	classVal = classVal.replace("button_onclick_wrong","");
-	document.getElementById("vertical").setAttribute("class",classVal);
-
-	var classVal = document.getElementById("horizontal").getAttribute("class");
-	classVal = classVal.replace("button_onclick_right","");
-	classVal = classVal.replace("button_onclick_wrong","");
-	document.getElementById("horizontal").setAttribute("class",classVal);
-
-
-	var rand = Math.floor(Math.random() * 4);
-	var img = document.getElementById("metamers");
-	duration = Number(document.getElementById("duration").value);
-	console.log(duration)
-	img.style.display = "";
-	var img_str = `${imgArr[rand]}`
-	var img_str = img_str.padStart(3, '0')
-	img.src = img_str+'.png'
-	param = setTimeout("document.getElementById('metamers').style.display='none'",duration);
-	console.log(param)
 }
 
 
@@ -189,31 +228,35 @@ function checkCorrect(checkedId) {
 		classVal = classVal.replace("button_onclick_right","");
 		classVal = classVal.replace("button_onclick_wrong","");
 		document.getElementById("horizontal").setAttribute("class",classVal);
+		alert("You have already made choice")
 	}
-	isChecked = true;
-	choiceId = checkedId;
+
+	else {
+		isChecked = true;
+		choiceId = checkedId;
 
 
-	var button = document.getElementById(checkedId);
+		var button = document.getElementById(checkedId);
 
-	var img = document.getElementById("metamers");
-	var srcIndex = img.src.lastIndexOf('/');
-	var src = img.src.slice(srcIndex+1);
+		var img = document.getElementById("metamers");
+		var srcIndex = img.src.lastIndexOf('/');
+		var src = img.src.slice(srcIndex+1);
 
-	if (checkedId == "vertical") {
-		if (src == "007.png" || src == "008.png" || src == "009.png" || src == "010.png" || src == "011.png" || src == "012.png") {
-			button.classList.add("button_onclick_right");
+		if (checkedId == "vertical") {
+			if (src == "007.png" || src == "008.png" || src == "009.png" || src == "010.png" || src == "011.png" || src == "012.png") {
+				button.classList.add("button_onclick_right");
+			}
+			else {
+				button.classList.add("button_onclick_wrong");
+			}
 		}
-		else {
-			button.classList.add("button_onclick_wrong");
-		}
-	}
-	else if (checkedId == "horizontal") {
-		if (src == "001.png" || src == "002.png" || src == "003.png" || src == "004.png" || src == "005.png" || src == "006.png") {
-			button.classList.add("button_onclick_right");
-		}
-		else {
-			button.classList.add("button_onclick_wrong");
+		else if (checkedId == "horizontal") {
+			if (src == "001.png" || src == "002.png" || src == "003.png" || src == "004.png" || src == "005.png" || src == "006.png") {
+				button.classList.add("button_onclick_right");
+			}
+			else {
+				button.classList.add("button_onclick_wrong");
+			}
 		}
 	}
 
