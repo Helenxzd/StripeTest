@@ -160,8 +160,7 @@ function checkCorrect(checkedId) {
 					var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
 					var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
 					result.innerText = text;
-					alert(`finished the 200ms test, accuracy: ${accuracy}%`)
-					alert("You have finished all the tests! Congratulations!")
+					alert(`finished the 200ms test`)
 					download("result.txt",text);
 
 				}
