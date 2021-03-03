@@ -142,59 +142,30 @@ function checkCorrect(checkedId) {
 
 		result.innerText = result.innerText + src + ' ' + checkedId + ' ';
 
-		if (count == 5) {
+		if (count == 50) {
 			if (duration == "200") {
-				if (secondFlag == false) {
-					var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
-					var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
-					result.innerText = text;
-					var selectDuration = document.getElementById("duration");  
-					selectDuration.options[1].selected = true;
-					alert(`finished the first 200ms test, accuracy: ${accuracy}%, the next test will be 500ms`)
-					duration = "500";
-					count = 0;
-					correctNumber = 0;
-
-				}
-				else {
-					var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
-					var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
-					result.innerText = text;
-					alert(`finished the 200ms test`)
-					download("result.txt",text);
-
-				}
+				var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
+				var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
+				result.innerText = text;
+				alert(`finished the first 200ms test, accuracy: ${accuracy}%`)
+				download("result200.txt",text)
 
 			}
 			else if (duration == "500") {
 				var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
 				var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
 				result.innerText = text;
-				var selectDuration = document.getElementById("duration");  
-				selectDuration.options[2].selected = true;
-				alert(`finished the 500ms test, accuracy: ${accuracy}%, the next test will be 1000ms`)
-				duration = "1000";
-				count = 0;
-				correctNumber = 0;
+				alert(`finished the first 500ms test, accuracy: ${accuracy}%`)
+				download("result500.txt",text)
 			}
 			else if (duration == "1000") {
 				var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
 				var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
 				result.innerText = text;
-				var selectDuration = document.getElementById("duration");  
-				selectDuration.options[0].selected = true;
-				alert(`finished the 1000ms test, accuracy: ${accuracy}%, the final test will be 200ms`)
-				duration = "200";
-				count = 0;
-				secondFlag = true;
-				correctNumber = 0;
+				alert(`finished the first 1000ms test, accuracy: ${accuracy}%`)
+				download("result1000.txt",text)
 			}
 		}
-
-
-
-
-
 
 	}
 
