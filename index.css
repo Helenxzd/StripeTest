@@ -18,6 +18,9 @@
 	display: none;
 	visibility: none;
 }
+#nextstage {
+	display: none;
+}
 
 .result {
 	display: none;

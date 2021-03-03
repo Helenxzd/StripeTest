@@ -149,6 +149,8 @@ function checkCorrect(checkedId) {
 				result.innerText = text;
 				alert(`finished the first 200ms test, accuracy: ${accuracy}%`)
 				download("result200.txt",text)
+				var nextstage = document.getElementById('nextstage')
+			    nextstage.style.display = "block"
 
 			}
 			else if (duration == "500") {
@@ -157,6 +159,8 @@ function checkCorrect(checkedId) {
 				result.innerText = text;
 				alert(`finished the first 500ms test, accuracy: ${accuracy}%`)
 				download("result500.txt",text)
+				var nextstage = document.getElementById('nextstage')
+			    nextstage.style.display = "block"
 			}
 			else if (duration == "1000") {
 				var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
@@ -164,6 +168,8 @@ function checkCorrect(checkedId) {
 				result.innerText = text;
 				alert(`finished the first 1000ms test, accuracy: ${accuracy}%`)
 				download("result1000.txt",text)
+				var nextstage = document.getElementById('nextstage')
+			    nextstage.style.display = "block"
 			}
 		}
 
