@@ -1,6 +1,5 @@
 var count = 0;
-var duration = 200;
-var totalNumber = 5;
+var totalNumber = 50;
 var correctNumber = 0;
 var two_strap = [1, 2, 7, 8]
 var four_strap = [3, 4, 9, 10]
@@ -147,7 +146,7 @@ function checkCorrect(checkedId) {
 				var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
 				var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
 				result.innerText = text;
-				alert(`finished the first 200ms test, accuracy: ${accuracy}%`)
+				alert(`finished the 200ms test, accuracy: ${accuracy}%`)
 				download("result200.txt",text)
 				var nextstage = document.getElementById('nextstage')
 			    nextstage.style.display = "block"
@@ -157,7 +156,7 @@ function checkCorrect(checkedId) {
 				var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
 				var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
 				result.innerText = text;
-				alert(`finished the first 500ms test, accuracy: ${accuracy}%`)
+				alert(`finished the 500ms test, accuracy: ${accuracy}%`)
 				download("result500.txt",text)
 				var nextstage = document.getElementById('nextstage')
 			    nextstage.style.display = "block"
@@ -166,7 +165,7 @@ function checkCorrect(checkedId) {
 				var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
 				var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
 				result.innerText = text;
-				alert(`finished the first 1000ms test, accuracy: ${accuracy}%`)
+				alert(`finished the 1000ms test, accuracy: ${accuracy}%`)
 				download("result1000.txt",text)
 				var nextstage = document.getElementById('nextstage')
 			    nextstage.style.display = "block"
