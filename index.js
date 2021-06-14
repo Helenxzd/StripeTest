@@ -152,20 +152,20 @@ function checkCorrect(checkedId) {
 			    nextstage.style.display = "block"
 
 			}
-			else if (duration == "500") {
+			else if (duration == "400") {
 				var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
 				var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
 				result.innerText = text;
 				alert(`finished the 500ms test, accuracy: ${accuracy}%`)
-				download("result500.txt",text)
+				download("result400.txt",text)
 				var nextstage = document.getElementById('nextstage')
 			    nextstage.style.display = "block"
 			}
-			else if (duration == "1000") {
+			else if (duration == "800") {
 				var accuracy = (100 * correctNumber/totalNumber).toFixed(2);
 				var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
 				result.innerText = text;
-				alert(`finished the 1000ms test, accuracy: ${accuracy}%`)
+				alert(`finished the 800ms test, accuracy: ${accuracy}%`)
 				download("result1000.txt",text)
 				var nextstage = document.getElementById('nextstage')
 			    nextstage.style.display = "block"
