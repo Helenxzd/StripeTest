@@ -1,9 +1,15 @@
 var count = 0;
 var totalNumber = 50;
 var correctNumber = 0;
-var two_strap = [1, 2, 7, 8]
-var four_strap = [3, 4, 9, 10]
-var eight_strap = [5, 6, 11, 12]
+// var two_strap = [1, 2, 7, 8]
+// var four_strap = [3, 4, 9, 10]
+// var eight_strap = [5, 6, 11, 12]
+
+var testPatterns1 = [11, 12, 13, 14];
+var testPatterns2 = [21, 22, 23, 24];
+var testPatterns3 = [31, 32, 33, 34];
+var testPatterns4 = [41, 42, 43, 44];
+
 
 document.addEventListener('keydown', function(event) {
   if (event.code == 'ArrowDown') {
@@ -56,16 +62,16 @@ function nextImage() {
 		clearTimeout(param);
 		isChecked = false;
 
-		numberOfStraps = document.getElementById("select").value;
-		if (numberOfStraps == "2") {
-			var imgArr = two_strap;
-		}
-		else if (numberOfStraps == "4") {
-			var imgArr = four_strap;
-		}
-		else if (numberOfStraps == "8") {
-			var imgArr = eight_strap;
-		}
+		// numberOfStraps = document.getElementById("select").value;
+		// if (numberOfStraps == "2") {
+		// 	var imgArr = two_strap;
+		// }
+		// else if (numberOfStraps == "4") {
+		// 	var imgArr = four_strap;
+		// }
+		// else if (numberOfStraps == "8") {
+		// 	var imgArr = eight_strap;
+		// }
 
 
 		var classVal = document.getElementById("vertical").getAttribute("class");
@@ -83,10 +89,38 @@ function nextImage() {
 		var img = document.getElementById("metamers");
 		duration = Number(document.getElementById("duration").value);
 		console.log(duration)
+
+        // find previous src if count != 0
+        if (count != 0) {
+        	var srcIndex = img.src.lastIndexOf('/');
+			var srcPng = img.src.slice(srcIndex+1);
+			var srcNum = srcPng.split('.')[0];
+			console.log(srcNum)
+			// find testPatterns based on previous srcNum
+			if (srcNum[0] == '1') {
+				testPatterns = testPatterns2;
+			}
+			else if (srcNum[0] == '2') {
+				testPatterns = testPatterns3;
+			}
+			else if (srcNum[0] == '3') {
+				testPatterns = testPatterns4;
+			}
+			else if (srcNum[0] == '4') {
+				testPatterns = testPatterns1;
+			}
+
+        }
+        else {
+        	// set testPatterns to be the first one
+        	testPatterns = testPatterns1;
+
+        }
+
+
 		img.style.display = "";
-		var img_str = `${imgArr[rand]}`
-		var img_str = img_str.padStart(3, '0')
-		img.src = img_str+'.png'
+		var img_str = `${testPatterns[rand]}`
+		img.src = 'testPatterns/'+img_str+'.png'
 		param = setTimeout("document.getElementById('metamers').style.display='none'",duration);
 		console.log(param)
 
@@ -115,7 +149,7 @@ function checkCorrect(checkedId) {
 		var src = img.src.slice(srcIndex+1);
 
 		if (checkedId == "vertical") {
-			if (src == "007.png" || src == "008.png" || src == "009.png" || src == "010.png" || src == "011.png" || src == "012.png") {
+			if (src == "11.png" || src == "21.png" || src == "31.png" || src == "41.png" || src == "12.png" || src == "22.png" || src == "32.png" || src == "42.png") {
 				button.classList.add("button_onclick_right");
 				correctNumber++;
 			}
@@ -124,7 +158,7 @@ function checkCorrect(checkedId) {
 			}
 		}
 		else if (checkedId == "horizontal") {
-			if (src == "001.png" || src == "002.png" || src == "003.png" || src == "004.png" || src == "005.png" || src == "006.png") {
+			if (src == "13.png" || src == "23.png" || src == "33.png" || src == "43.png" || src == "14.png" || src == "24.png" || src == "34.png" || src == "44.png") {
 				button.classList.add("button_onclick_right");
 				correctNumber++;
 			}
