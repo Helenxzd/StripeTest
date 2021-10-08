@@ -200,7 +200,7 @@ function checkCorrect(checkedId) {
 				var text = document.getElementById('result').innerText + ' stripe Number: ' + numberOfStraps+ ' duration: ' + duration + ' accuracy: ' + accuracy + '%' + '  ';
 				result.innerText = text;
 				alert(`finished the 800ms test, accuracy: ${accuracy}%`)
-				download("result1000.txt",text)
+				download("result800.txt",text)
 				var nextstage = document.getElementById('nextstage')
 			    nextstage.style.display = "block"
 			}
